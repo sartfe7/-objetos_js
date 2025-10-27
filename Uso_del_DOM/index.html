@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>La Planta Crece 🌿</title>
+  <!-- Conexión al archivo CSS externo -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>🌱 ¡Haz crecer tu planta! 🌱</h1>
+  <div id="planta">🌱</div>
+  <button onclick="crecerPlanta()">Regar planta 💧</button>
+  <p id="mensaje"></p>
+
+  <script>
+    // Accedemos al DOM usando getElementById
+    const planta = document.getElementById("planta");
+    const mensaje = document.getElementById("mensaje");
+
+    let etapa = 0;
+
+    function crecerPlanta() {
+      etapa++;
+
+      if (etapa === 1) {
+        planta.textContent = "🌿";
+        planta.style.fontSize = "100px";
+        mensaje.textContent = "¡La planta creció un poco!";
+      } else if (etapa === 2) {
+        planta.textContent = "🌳";
+        planta.style.fontSize = "130px";
+        mensaje.textContent = "¡Ahora es un árbol fuerte!";
+      } else {
+        mensaje.textContent = "🌳 ¡Ya está enorme! No necesita más agua.";
+        planta.style.transform = "rotate(5deg)";
+      }
+    }
+  </script>
+</body>
+</html>

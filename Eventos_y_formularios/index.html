@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Formulario con Validación</title>
+  <style>
+    body {
+      font-family: Arial;
+      background-color: #f0f8ff;
+      text-align: center;
+      padding: 30px;
+    }
+    form {
+      background-color: white;
+      display: inline-block;
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 0 10px gray;
+    }
+    input {
+      margin: 10px;
+      padding: 8px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+    button {
+      background-color: #007BFF;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Registro de estudiante</h2>
+
+  <form onsubmit="return validarFormulario()">
+    <input type="text" id="nombre" placeholder="Nombre completo"><br>
+    <input type="email" id="correo" placeholder="Correo electrónico"><br>
+    <input type="password" id="clave" placeholder="Contraseña (mínimo 6 caracteres)"><br>
+    <button type="submit">Registrar</button>
+  </form>
+
+  <script>
+    function validarFormulario() {
+      let nombre = document.getElementById("nombre").value;
+      let correo = document.getElementById("correo").value;
+      let clave = document.getElementById("clave").value;
+
+      if (nombre == "" || correo == "" || clave == "") {
+        alert("⚠️ Todos los campos son obligatorios.");
+        return false;
+      }
+      if (clave.length < 6) {
+        alert("La contraseña debe tener al menos 6 caracteres.");
+        return false;
+      }
+      alert("✅ Registro exitoso. ¡Bienvenido, " + nombre + "!");
+      return true;
+    }
+
+    // Eventos visuales
+    document.getElementById("nombre").onfocus = function() {
+      this.style.background = "#e6f7ff";
+    };
+    document.getElementById("nombre").onblur = function() {
+      this.style.background = "white";
+    };
+  </script>
+
+</body>
+</html>   

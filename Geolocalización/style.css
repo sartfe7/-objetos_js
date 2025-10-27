@@ -1,0 +1,47 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #e0f7fa;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    text-align: center;
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    width: 90%;
+    max-width: 500px;
+}
+
+button {
+    background-color: #00796b;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    font-size: 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+button:hover {
+    background-color: #004d40;
+}
+
+#ubicacion {
+    margin: 20px 0;
+    font-size: 18px;
+}
+
+#mapa {
+    height: 300px;
+    width: 100%;
+    border-radius: 8px;
+    margin-top: 10px;
+}

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¿Dónde estoy?</title>
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+</head>
+<body>
+
+    <div class="container">
+        <h1>🌍 ¿Dónde estoy?</h1>
+        <button onclick="obtenerUbicacion()">Mostrar mi ubicación</button>
+        <p id="ubicacion">Haz clic en el botón para ver tu ubicación.</p>
+        <div id="mapa"></div>
+    </div>
+
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+    <script>
+        function obtenerUbicacion() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(mostrarPosicion, mostrarError);
+            } else {
+                document.getElementById("ubicacion").innerText = "La geolocalización no es compatible con este navegador.";
+            }
+        }
+
+        function mostrarPosicion(posicion) {
+            const lat = posicion.coords.latitude;
+            const lon = posicion.coords.longitude;
+
+            document.getElementById("ubicacion").innerText = `Estás en: 🌐 Latitud: ${lat.toFixed(5)}, Longitud: ${lon.toFixed(5)}`;
+
+            // Mostrar mapa con Leaflet
+            const mapa = L.map('mapa').setView([lat, lon], 13);
+
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '© OpenStreetMap contributors'
+            }).addTo(mapa);
+
+            L.marker([lat, lon]).addTo(mapa)
+                .bindPopup("¡Aquí estás!")
+                .openPopup();
+        }
+
+        function mostrarError(error) {
+            switch (error.code) {
+                case error.PERMISSION_DENIED:
+                    document.getElementById("ubicacion").innerText = "Permiso denegado para obtener la ubicación.";
+                    break;
+                case error.POSITION_UNAVAILABLE:
+                    document.getElementById("ubicacion").innerText = "La información de ubicación no está disponible.";
+                    break;
+                case error.TIMEOUT:
+                    document.getElementById("ubicacion").innerText = "Se agotó el tiempo para obtener la ubicación.";
+                    break;
+                default:
+                    document.getElementById("ubicacion").innerText = "Ocurrió un error desconocido.";
+                    break;
+            }
+        }
+    </script>
+</body>
