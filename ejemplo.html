@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reloj Digital con setInterval()</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background-color: #111;
+      color: #0f0;
+      font-size: 3em;
+      margin-top: 20%;
+    }
+  </style>
+</head>
+<body>
+  <div id="reloj"></div>
+
+  <script>
+    function actualizarReloj() {
+      const ahora = new Date();
+      const horas = String(ahora.getHours()).padStart(2, '0');
+      const minutos = String(ahora.getMinutes()).padStart(2, '0');
+      const segundos = String(ahora.getSeconds()).padStart(2, '0');
+      document.getElementById('reloj').textContent = `${horas}:${minutos}:${segundos}`;
+    }
+
+    // Actualiza el reloj cada segundo
+    setInterval(actualizarReloj, 1000);
+
+    // Inicializa al cargar la página
+    actualizarReloj();
+  </script>
+</body>
+</html>

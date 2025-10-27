@@ -3,35 +3,155 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Reloj Digital con setInterval()</title>
+  <title>Ejemplos del BOM en JavaScript</title>
   <style>
     body {
       font-family: Arial, sans-serif;
-      text-align: center;
-      background-color: #111;
-      color: #0f0;
-      font-size: 3em;
-      margin-top: 20%;
+      margin: 20px;
+      background: #f2f2f2;
+      color: #333;
+    }
+    section {
+      background: white;
+      padding: 15px;
+      margin-bottom: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    h2 {
+      color: #0077cc;
+    }
+    button {
+      padding: 6px 12px;
+      border: none;
+      background: #0077cc;
+      color: white;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #005fa3;
+    }
+    input {
+      padding: 6px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
     }
   </style>
 </head>
 <body>
-  <div id="reloj"></div>
+
+  <h1>Ejemplos del BOM (Browser Object Model) en JavaScript</h1>
+  <p>Demostraciones visuales de cómo interactuar con el navegador usando JavaScript.</p>
+
+  <section>
+    <h2>1. Información del navegador</h2>
+    <p id="info"></p>
+  </section>
+
+  <section>
+    <h2>2. URL actual</h2>
+    <p id="url"></p>
+  </section>
+
+  <section>
+    <h2>3. Tamaño de la ventana</h2>
+    <p id="ventana"></p>
+  </section>
+
+  <section>
+    <h2>4. Recargar la página</h2>
+    <button onclick="location.reload()">Recargar</button>
+  </section>
+
+  <section>
+    <h2>5. Hora actual</h2>
+    <p id="hora"></p>
+  </section>
+
+  <section>
+    <h2>6. Saludo personalizado</h2>
+    <p id="saludo"></p>
+  </section>
+
+  <section>
+    <h2>7. Dominio actual</h2>
+    <p id="dominio"></p>
+  </section>
+
+  <section>
+    <h2>8. Temporizador</h2>
+    <p id="mensaje">Esperando...</p>
+  </section>
+
+  <section>
+    <h2>9. Contador automático</h2>
+    <p id="contador">0</p>
+  </section>
+
+  <section>
+    <h2>10. Guardar y mostrar nombre (localStorage)</h2>
+    <input type="text" id="nombre" placeholder="Escribe tu nombre">
+    <button onclick="guardar()">Guardar</button>
+    <p id="salida"></p>
+  </section>
 
   <script>
-    function actualizarReloj() {
-      const ahora = new Date();
-      const horas = String(ahora.getHours()).padStart(2, '0');
-      const minutos = String(ahora.getMinutes()).padStart(2, '0');
-      const segundos = String(ahora.getSeconds()).padStart(2, '0');
-      document.getElementById('reloj').textContent = `${horas}:${minutos}:${segundos}`;
-    }
+    // Esperar a que la página cargue completamente
+    window.onload = function() {
 
-    // Actualiza el reloj cada segundo
-    setInterval(actualizarReloj, 1000);
+      // 1. Información del navegador
+      document.getElementById("info").innerHTML = 
+        "Navegador: " + navigator.appName + "<br>" +
+        "Idioma: " + navigator.language + "<br>" +
+        "¿En línea?: " + (navigator.onLine ? "Sí" : "No");
 
-    // Inicializa al cargar la página
-    actualizarReloj();
+      // 2. URL actual
+      document.getElementById("url").innerHTML = 
+        "Estás visitando: <b>" + location.href + "</b>";
+
+      // 3. Tamaño de la ventana
+      document.getElementById("ventana").innerHTML =
+        "Ancho: " + window.innerWidth + " px<br>" +
+        "Alto: " + window.innerHeight + " px";
+
+      // 5. Hora actual (actualiza cada segundo)
+      function mostrarHora() {
+        document.getElementById("hora").innerHTML = 
+          "Son las " + new Date().toLocaleTimeString();
+      }
+      mostrarHora();
+      setInterval(mostrarHora, 1000);
+
+      // 6. Saludo con el nombre del navegador
+      document.getElementById("saludo").innerHTML = 
+        "¡Hola Mundo! Estás usando: <b>" + navigator.userAgent + "</b>";
+
+      // 7. Dominio actual
+      document.getElementById("dominio").innerHTML = 
+        "Dominio: <b>" + location.hostname + "</b>";
+
+      // 8. Temporizador (mensaje a los 3 segundos)
+      setTimeout(() => {
+        document.getElementById("mensaje").innerHTML = "¡Han pasado 3 segundos! 👋";
+      }, 3000);
+
+      // 9. Contador automático
+      let c = 0;
+      setInterval(() => {
+        c++;
+        document.getElementById("contador").innerText = c;
+      }, 1000);
+
+      // 10. Guardar nombre en localStorage
+      window.guardar = function() {
+        let nombre = document.getElementById("nombre").value;
+        localStorage.setItem("usuario", nombre);
+        document.getElementById("salida").innerHTML = 
+          "Hola <b>" + nombre + "</b>, tu nombre fue guardado 😊";
+      };
+    };
   </script>
+
 </body>
 </html>
